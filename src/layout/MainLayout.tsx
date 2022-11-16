@@ -8,7 +8,9 @@ export default function MainLayout(props: { children: any }): JSX.Element {
           <Typography variant="h6"> To do List App</Typography>
         </Toolbar>
       </AppBar>
-      <Box p={2}>{props.children}</Box>
+      <Box component="main" p={2} sx={{}}>
+        {props.children}
+      </Box>
     </>
   );
 }
