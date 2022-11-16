@@ -72,22 +72,6 @@ export default function CreateTodoList(props: {
       <Grid xs={12} display="flex" justifyContent="center" padding={1}>
         <Typography>Tasks</Typography>
       </Grid>
-      <Grid xs={12} display="flex" justifyContent="center" padding={1}>
-        <TextField
-          fullWidth
-          placeholder="Add new Task"
-          value={newTask.description}
-          onChange={(e) =>
-            setNewTask({ ...newTask, description: e.target.value })
-          }
-        />
-      </Grid>
-      <Grid xs={12} display="flex" justifyContent="center" padding={1}>
-        <Button fullWidth variant="contained" onClick={() => addTask()}>
-          add new task
-        </Button>
-      </Grid>
-
       <Grid xs={12}>
         <List>
           {tasks && tasks.length ? (
@@ -104,6 +88,21 @@ export default function CreateTodoList(props: {
             <ListItem>No taks to show</ListItem>
           )}
         </List>
+      </Grid>
+      <Grid xs={12} display="flex" justifyContent="center" padding={1}>
+        <TextField
+          fullWidth
+          placeholder="Add new Task"
+          value={newTask.description}
+          onChange={(e) =>
+            setNewTask({ ...newTask, description: e.target.value })
+          }
+        />
+      </Grid>
+      <Grid xs={12} display="flex" justifyContent="center" padding={1}>
+        <Button fullWidth variant="contained" onClick={() => addTask()}>
+          add new task
+        </Button>
       </Grid>
 
       <Grid xs={12} display="flex" justifyContent="center" padding={1}>

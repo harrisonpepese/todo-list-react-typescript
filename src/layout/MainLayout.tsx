@@ -5,10 +5,10 @@ export default function MainLayout(props: { children: any }): JSX.Element {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6"> To do List App</Typography>
+          <Typography variant="h6"> Todo List App</Typography>
         </Toolbar>
       </AppBar>
-      <Box component="main" p={2} sx={{}}>
+      <Box component="main" p={2}>
         {props.children}
       </Box>
     </>
