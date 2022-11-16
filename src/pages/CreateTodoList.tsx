@@ -105,7 +105,7 @@ export default function CreateTodoList(props: {
               back
             </Button>
           </Grid>
-          <Grid xs={3} itemS display="flex" justifyContent="center" padding={1}>
+          <Grid xs={3} item display="flex" justifyContent="center" padding={1}>
             <Button fullWidth variant="contained" onClick={handleSubmit}>
               Save
             </Button>
