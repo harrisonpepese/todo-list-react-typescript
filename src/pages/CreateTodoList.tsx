@@ -14,7 +14,10 @@ import { TodoListItem } from "../components/createTodoList/TodoListItem";
 import { Task } from "../entities/task";
 import { TodoList } from "../entities/todoList";
 const emptyTask: Task = { done: false, description: "" };
-export default function CreateTodoList(props: { todoList?: TodoList }) {
+export default function CreateTodoList(props: {
+  todoList?: TodoList;
+  onSubmit: (data: TodoList) => void;
+}) {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
