@@ -9,7 +9,7 @@ export default function BaseLayout(props: {
   const { title, children } = props;
   return (
     <Grid container padding={2} justifyContent="center">
-      <Grid xs={12}>
+      <Grid item xs={12}>
         <PageTitle>{title}</PageTitle>
       </Grid>
       {children}

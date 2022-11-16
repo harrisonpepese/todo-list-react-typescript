@@ -11,7 +11,7 @@ import { useState } from "react";
 import { Task } from "../../entities/task";
 import InputHelper from "../../utils/inputHelper";
 
-export function TodoListItem(props: {
+export function TaskListItem(props: {
   index: number;
   task: Task;
   onChange: (index: number, value: Task) => void;
