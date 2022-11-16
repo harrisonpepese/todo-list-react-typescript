@@ -2,6 +2,6 @@ import { Task } from "./task";
 
 export type TodoList = {
   title: string;
-  dueDate: Date;
+  dueDate: string;
   tasks: Task[];
 };
