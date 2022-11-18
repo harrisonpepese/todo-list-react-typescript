@@ -5,7 +5,19 @@ import TaskList from "../components/createTodoList/TaskList";
 import { Task } from "../entities/task";
 import { TodoList } from "../entities/todoList";
 import BaseLayout from "../layout/BaseLayout";
+import {
+  InputHandler,
+  InputState,
+  minLength,
+  required,
+} from "../utils/inputValidation";
 const emptyTask: Task = { done: false, description: "" };
+
+type CreateTodoInput = {
+  title: InputState;
+  dueDate: InputState;
+};
+type StateType = keyof CreateTodoInput;
 export default function CreateTodoList(props: {
   todoList?: TodoList[];
   onSubmit: (data: TodoList, index?: number) => void;
@@ -16,10 +28,29 @@ export default function CreateTodoList(props: {
     props.todoList && index !== undefined ? props.todoList[index] : undefined;
   console.log(props.todoList && index);
   const navigate = useNavigate();
-  const [title, setTitle] = useState(list?.title || "");
-  const [dueDate, setDueDate] = useState(list?.dueDate || "");
+  const [state, setState] = useState<CreateTodoInput>({
+    title: {
+      value: list?.title || "",
+      hint: "",
+      rules: [minLength, required],
+      error: false,
+      minLenght: 3,
+    },
+    dueDate: {
+      value: list?.title || "",
+      hint: "",
+      rules: [required],
+      error: false,
+      minLenght: 3,
+    },
+  });
   const [tasks, setTasks] = useState<Task[]>(list?.tasks || []);
   const [newTask, setNewTask] = useState<Task>(emptyTask);
+
+  const handleInputChange = (field: StateType, targetValue: string) => {
+    const res = InputHandler(state[field], targetValue);
+    setState({ ...state, [field]: res });
+  };
 
   const addTask = () => {
     if (!newTask.description) {
@@ -33,8 +64,30 @@ export default function CreateTodoList(props: {
   const back = () => {
     navigate("/");
   };
+
+  const validate = () => {
+    const newState = { ...state };
+    let error = false;
+    const keys = Object.keys(state) as StateType[];
+    for (const key of keys) {
+      const res = InputHandler(state[key], state[key].value);
+      newState[key] = res;
+      if (res.error) {
+        error = true;
+      }
+    }
+    setState(newState);
+    return !error;
+  };
+
   const handleSubmit = () => {
-    props.onSubmit({ title, dueDate, tasks }, index);
+    if (!validate()) {
+      return;
+    }
+    props.onSubmit(
+      { title: state.title.value, dueDate: state.dueDate.value, tasks },
+      index
+    );
     navigate("/");
   };
   return (
@@ -53,8 +106,10 @@ export default function CreateTodoList(props: {
               fullWidth
               type="text"
               placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              helperText={state.title.hint}
+              error={state.title.error}
+              value={state.title.value}
+              onChange={(e) => handleInputChange("title", e.target.value)}
             />
           </Grid>
           <Grid
@@ -69,8 +124,10 @@ export default function CreateTodoList(props: {
               fullWidth
               type="date"
               placeholder="due date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
+              helperText={state.dueDate.hint}
+              error={state.dueDate.error}
+              value={state.dueDate.value}
+              onChange={(e) => handleInputChange("dueDate", e.target.value)}
             />
           </Grid>
           <Grid item xs={12} display="flex" justifyContent="center" padding={1}>
