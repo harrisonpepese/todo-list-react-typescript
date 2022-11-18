@@ -49,7 +49,7 @@ export default function DashboardCard(props: {
           <OpenInFullIcon sx={{ color: "white" }} />
         </IconButton>
       </CardMedia>
-      <CardActionArea>
+      <CardActionArea onClick={props.onClick}>
         <CardContent>
           <Typography variant="h5">{props.todoList.title}</Typography>
           <Typography variant="body2">

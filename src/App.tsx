@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import { TodoList } from "./entities/todoList";
 import MainLayout from "./layout/MainLayout";
 import CreateTodoList from "./pages/CreateTodoList";
