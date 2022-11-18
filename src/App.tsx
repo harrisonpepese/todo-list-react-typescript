@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TodoList } from "./entities/todoList";
 import MainLayout from "./layout/MainLayout";
 import CreateTodoList from "./pages/CreateTodoList";
@@ -29,6 +29,9 @@ function App() {
     }
     return setList([...list, value]);
   };
+  useEffect(() => {
+    document.title = "Todo List App";
+  });
   return (
     <MainLayout>
       <Router>
