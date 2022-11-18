@@ -1,19 +1,24 @@
 import { Button, Grid, Typography, TextField, Box } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TaskList from "../components/createTodoList/TaskList";
 import { Task } from "../entities/task";
 import { TodoList } from "../entities/todoList";
 import BaseLayout from "../layout/BaseLayout";
 const emptyTask: Task = { done: false, description: "" };
 export default function CreateTodoList(props: {
-  todoList?: TodoList;
-  onSubmit: (data: TodoList) => void;
+  todoList?: TodoList[];
+  onSubmit: (data: TodoList, index?: number) => void;
 }) {
+  const { id } = useParams();
+  const index = id ? Number.parseInt(id) : undefined;
+  const list =
+    props.todoList && index !== undefined ? props.todoList[index] : undefined;
+  console.log(props.todoList && index);
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [title, setTitle] = useState(list?.title || "");
+  const [dueDate, setDueDate] = useState(list?.dueDate || "");
+  const [tasks, setTasks] = useState<Task[]>(list?.tasks || []);
   const [newTask, setNewTask] = useState<Task>(emptyTask);
 
   const addTask = () => {
@@ -25,8 +30,11 @@ export default function CreateTodoList(props: {
     setTasks(newTaskState);
     setNewTask(emptyTask);
   };
+  const back = () => {
+    navigate("/");
+  };
   const handleSubmit = () => {
-    props.onSubmit({ title, dueDate, tasks });
+    props.onSubmit({ title, dueDate, tasks }, index);
     navigate("/");
   };
   return (
@@ -101,7 +109,7 @@ export default function CreateTodoList(props: {
             </Button>
           </Grid>
           <Grid xs={3} item display="flex" justifyContent="center" padding={1}>
-            <Button fullWidth variant="contained" onClick={handleSubmit}>
+            <Button fullWidth variant="contained" onClick={back}>
               back
             </Button>
           </Grid>

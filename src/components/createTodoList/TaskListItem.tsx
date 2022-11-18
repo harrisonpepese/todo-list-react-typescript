@@ -1,6 +1,7 @@
 import {
   Button,
   Checkbox,
+  IconButton,
   ListItem,
   ListItemIcon,
   ListItemSecondaryAction,
@@ -10,6 +11,7 @@ import {
 import { useState } from "react";
 import { Task } from "../../entities/task";
 import InputHelper from "../../utils/inputHelper";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export function TaskListItem(props: {
   index: number;
@@ -50,7 +52,9 @@ export function TaskListItem(props: {
       )}
 
       <ListItemSecondaryAction>
-        <Button onClick={() => onDelete(index)}>delete</Button>
+        <IconButton onClick={() => onDelete(index)}>
+          <DeleteIcon />
+        </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
   );
