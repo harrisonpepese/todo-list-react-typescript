@@ -26,12 +26,14 @@ export function TaskListItem(props: {
     <ListItem>
       <ListItemIcon>
         <Checkbox
+          data-testid="tasklistitem-checkbox"
           checked={task.done}
           onChange={(e) => onChange(index, { ...task, done: e.target.checked })}
         />
       </ListItemIcon>
       {editing ? (
         <TextField
+          data-testid="tasklistitem-textfield"
           autoFocus
           onBlur={() => setEditing(false)}
           onKeyDown={(key) =>
@@ -46,13 +48,20 @@ export function TaskListItem(props: {
           value={task.description}
         />
       ) : (
-        <Typography component="p" onClick={() => setEditing(true)}>
+        <Typography
+          data-testid="tasklistitem-text"
+          component="p"
+          onClick={() => setEditing(true)}
+        >
           {task.description}
         </Typography>
       )}
 
       <ListItemSecondaryAction>
-        <IconButton onClick={() => onDelete(index)}>
+        <IconButton
+          data-testid="tasklistitem-deletebutton"
+          onClick={() => onDelete(index)}
+        >
           <DeleteIcon />
         </IconButton>
       </ListItemSecondaryAction>
