@@ -23,7 +23,7 @@ export function TaskListItem(props: {
   const [editing, setEditing] = useState(false);
 
   return (
-    <ListItem>
+    <ListItem data-testid="tasklist-item">
       <ListItemIcon>
         <Checkbox
           data-testid="tasklistitem-checkbox"
