@@ -29,22 +29,28 @@ export function ConfirmModal(props: {
             justifyContent="space-between"
           >
             <Grid item xs={12} textAlign="center">
-              <Typography>{props.message}</Typography>
+              <Typography data-testid="confirmmodal-text">
+                {props.message}
+              </Typography>
             </Grid>
             <Grid item xs={6}>
-              <Button fullWidth onClick={props.onClose}>
+              <Button
+                data-testid="confirmmodal-cancelbutton"
+                fullWidth
+                onClick={props.onClose}
+              >
                 cancel
               </Button>
             </Grid>
             <Grid item xs={6}>
               <Button
-                fullWidth
+                data-testid="confirmmodal-submitbutton"
                 onClick={() => {
                   props.onSubmit(props.index);
                   props.onClose();
                 }}
-                variant="contained"
               >
+                {" "}
                 confirm
               </Button>
             </Grid>

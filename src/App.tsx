@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TodoList } from "./entities/todoList";
 import MainLayout from "./layout/MainLayout";
 import CreateTodoList from "./pages/CreateTodoList";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {

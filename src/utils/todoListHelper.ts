@@ -1,20 +1,23 @@
+import { Task } from "../entities/task";
 import { TodoList } from "../entities/todoList";
 
 export default class TodoListHelper {
   static getOverview(todoList: TodoList) {
-    const taskLength = todoList.tasks.length;
-    const completedTasks = todoList.tasks.filter((x) => x.done).length;
+    const completedTasks = this.getCompletedTasks(todoList.tasks);
     return {
-      status: this.getStatus(completedTasks, taskLength),
+      status: this.getStatus(todoList.tasks),
       completedTasks,
-      isComplete: completedTasks === taskLength,
       progress: Math.round((completedTasks / todoList.tasks.length) * 100),
     };
   }
-  static getStatus(completedTasks: number, task: number) {
+  static getCompletedTasks(tasks: Task[]) {
+    return tasks.filter((x) => x.done).length;
+  }
+  static getStatus(tasks: Task[]) {
+    const completedTasks = this.getCompletedTasks(tasks);
     if (completedTasks === 0) {
       return "Not started";
-    } else if (completedTasks === task) {
+    } else if (completedTasks === tasks.length) {
       return "Completed";
     } else {
       return "In progress";

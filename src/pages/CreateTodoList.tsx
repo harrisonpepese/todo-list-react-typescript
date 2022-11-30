@@ -1,7 +1,9 @@
-import { Button, Grid, Typography, TextField, Box } from "@mui/material";
+import { Button, Grid, Typography, Box } from "@mui/material";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { ContainedButton } from "../components/buttons/ContainedButton";
 import TaskList from "../components/createTodoList/TaskList";
+import InputField from "../components/inputField/InputField";
 import { Task } from "../entities/task";
 import { TodoList } from "../entities/todoList";
 import BaseLayout from "../layout/BaseLayout";
@@ -102,11 +104,11 @@ export default function CreateTodoList(props: {
             justifyContent="center"
             padding={1}
           >
-            <TextField
+            <InputField
               fullWidth
               type="text"
               placeholder="Title"
-              helperText={state.title.hint}
+              hint={state.title.hint}
               error={state.title.error}
               value={state.title.value}
               onChange={(e) => handleInputChange("title", e.target.value)}
@@ -120,11 +122,11 @@ export default function CreateTodoList(props: {
             justifyContent="center"
             padding={1}
           >
-            <TextField
+            <InputField
               fullWidth
               type="date"
               placeholder="due date"
-              helperText={state.dueDate.hint}
+              hint={state.dueDate.hint}
               error={state.dueDate.error}
               value={state.dueDate.value}
               onChange={(e) => handleInputChange("dueDate", e.target.value)}
@@ -144,7 +146,7 @@ export default function CreateTodoList(props: {
             justifyContent="center"
             padding={1}
           >
-            <TextField
+            <InputField
               fullWidth
               placeholder="Add new Task"
               value={newTask.description}
@@ -161,19 +163,27 @@ export default function CreateTodoList(props: {
             justifyContent="center"
             padding={1}
           >
-            <Button fullWidth variant="contained" onClick={() => addTask()}>
+            <ContainedButton
+              fullWidth
+              variant="contained"
+              onClick={() => addTask()}
+            >
               add new task
-            </Button>
+            </ContainedButton>
           </Grid>
           <Grid xs={3} item display="flex" justifyContent="center" padding={1}>
-            <Button fullWidth variant="contained" onClick={back}>
+            <ContainedButton fullWidth variant="contained" onClick={back}>
               back
-            </Button>
+            </ContainedButton>
           </Grid>
           <Grid xs={3} item display="flex" justifyContent="center" padding={1}>
-            <Button fullWidth variant="contained" onClick={handleSubmit}>
+            <ContainedButton
+              fullWidth
+              variant="contained"
+              onClick={handleSubmit}
+            >
               Save
-            </Button>
+            </ContainedButton>
           </Grid>
         </Grid>
       </Box>

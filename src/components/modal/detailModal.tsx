@@ -53,7 +53,7 @@ export default function DetailModal(props: {
     open: false,
     index,
   });
-  const { isComplete, progress, status } = TodoListHelper.getOverview(todoList);
+  const { progress, status } = TodoListHelper.getOverview(todoList);
 
   const gotoEdit = () => {
     props.onClose();
@@ -78,7 +78,7 @@ export default function DetailModal(props: {
           component="div"
           sx={{
             backgroundColor: (theme) =>
-              isComplete
+              status === "Completed"
                 ? theme.palette.success.main
                 : theme.palette.primary.main,
             padding: 1,
@@ -90,25 +90,36 @@ export default function DetailModal(props: {
             <Typography variant="h6">{status}</Typography>
           </Box>
           <IconButton
+            data-testid="detailmodal-deletebutton"
             size="small"
             onClick={() => setDeleteOpen({ ...isDeleteOpen, open: true })}
           >
             <DeleteIcon sx={{ color: "white" }} />
           </IconButton>
-          <IconButton size="small" onClick={gotoEdit}>
+          <IconButton
+            size="small"
+            data-testid="detailmodal-editbutton"
+            onClick={gotoEdit}
+          >
             <EditIcon sx={{ color: "white" }} />
           </IconButton>
-          <IconButton size="small" onClick={handleClose}>
+          <IconButton
+            size="small"
+            data-testid="detailmodal-closebutton"
+            onClick={handleClose}
+          >
             <CloseIcon sx={{ color: "white" }} />
           </IconButton>
         </CardMedia>
         <CardContent sx={{ overflow: "auto", height: "100%" }}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item xs={12}>
-              <Typography variant="h4">{todoList.title}</Typography>
+              <Typography variant="h4" data-testid="detailmodal-title">
+                {todoList.title}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant="caption">
+              <Typography variant="caption" data-testid="detailmodal-duedate">
                 Due date: {dayjs(todoList.dueDate).format("DD/MM/YYYY")}
               </Typography>
             </Grid>
@@ -117,13 +128,14 @@ export default function DetailModal(props: {
             </Grid>
             <Grid item xs={12} marginBottom={1}>
               <LinearProgress
-                color={isComplete ? "success" : "primary"}
+                color={status === "Completed" ? "success" : "primary"}
                 variant="determinate"
                 value={progress}
               ></LinearProgress>
             </Grid>
             <Grid item xs={8}>
               <TextField
+                data-testid="detailmodal-input"
                 fullWidth
                 value={newTask}
                 onChange={(e) => setNewTask(e.target.value)}
@@ -132,7 +144,11 @@ export default function DetailModal(props: {
               ></TextField>
             </Grid>
             <Grid item>
-              <Button onClick={onAddTask} variant="contained">
+              <Button
+                data-testid="detailmodal-inputSubmit"
+                onClick={onAddTask}
+                variant="contained"
+              >
                 Add Task
               </Button>
             </Grid>
