@@ -1,17 +1,11 @@
-import {
-  Button,
-  Checkbox,
-  IconButton,
-  ListItem,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { useState } from "react";
 import { Task } from "../../entities/task";
 import InputHelper from "../../utils/inputHelper";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { ListItem, ListItemAction, ListItemIcon } from "../list/List";
+import Checkbox from "../inputField/CheckBox";
+import InputField from "../inputField/InputField";
 
 export function TaskListItem(props: {
   index: number;
@@ -31,8 +25,9 @@ export function TaskListItem(props: {
           onChange={(e) => onChange(index, { ...task, done: e.target.checked })}
         />
       </ListItemIcon>
+
       {editing ? (
-        <TextField
+        <InputField
           data-testid="tasklistitem-textfield"
           autoFocus
           onBlur={() => setEditing(false)}
@@ -44,7 +39,6 @@ export function TaskListItem(props: {
           onChange={(e) =>
             onChange(index, { ...task, description: e.target.value })
           }
-          variant="standard"
           value={task.description}
         />
       ) : (
@@ -56,15 +50,14 @@ export function TaskListItem(props: {
           {task.description}
         </Typography>
       )}
-
-      <ListItemSecondaryAction>
+      <ListItemAction>
         <IconButton
           data-testid="tasklistitem-deletebutton"
           onClick={() => onDelete(index)}
         >
           <DeleteIcon />
         </IconButton>
-      </ListItemSecondaryAction>
+      </ListItemAction>
     </ListItem>
   );
 }

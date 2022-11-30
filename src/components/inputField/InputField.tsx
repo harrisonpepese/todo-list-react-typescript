@@ -2,14 +2,16 @@ import { render } from "@testing-library/react";
 import styled from "styled-components";
 
 export const TextField = styled.input<{ error?: boolean }>`
-  font-size: 1.2em;
+  font-size: 1rem;
   width: 100%;
-  padding: 0.5em 0.5em;
+  flex-grow: 1;
+  padding: ${(props) => (props.type === "date" ? "10.6px 10px" : "10px 10px")};
   color: ${(props) => (props.error ? "red" : "black")};
   border: 1px solid ${(props) => (props.error ? "red" : "black")};
   border-radius: 3px;
   outline: none;
   &:focus {
+    padding: ${(props) => (props.type === "date" ? "9.6px 9px" : "9px 9px")};
     border: 2px solid ${(props) => (props.error ? "red" : "black")};
     transition: 0.1s;
   }
@@ -18,7 +20,8 @@ export const TextField = styled.input<{ error?: boolean }>`
   }
 `;
 export const TextFieldContainer = styled.div<{ fullWidth?: boolean }>`
-  padding: 2px;
+  padding: 2px 2px 2px 2px;
+  display: flex;
   width: ${(props) => (props.fullWidth ? "100%" : "")};
 `;
 export const HintText = styled.div<{ error?: boolean }>`

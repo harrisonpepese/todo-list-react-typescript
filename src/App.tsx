@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { TodoList } from "./entities/todoList";
 import MainLayout from "./layout/MainLayout";
 import CreateTodoList from "./pages/CreateTodoList";
-import Dashboard from "./pages/Components";
+import Dashboard from "./pages/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Components from "./pages/Components";
 
 function App() {
   const [list, setList] = useState<TodoList[]>([
@@ -54,6 +55,7 @@ function App() {
             path="/update/:id"
             element={<CreateTodoList todoList={list} onSubmit={updateList} />}
           />
+          <Route path="/components" element={<Components />} />
         </Routes>
       </Router>
     </MainLayout>

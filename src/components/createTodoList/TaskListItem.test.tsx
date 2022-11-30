@@ -27,9 +27,7 @@ describe("TaskListItem Test", () => {
   });
 
   it("render", () => {
-    const checked = screen
-      .getByTestId("tasklistitem-checkbox")
-      .querySelector('input[type="checkbox"]');
+    const checked = screen.getByTestId("tasklistitem-checkbox");
     expect(checked).toHaveProperty("checked", task.done);
     expect(screen.getByTestId("tasklistitem-text")).toHaveTextContent(
       task.description

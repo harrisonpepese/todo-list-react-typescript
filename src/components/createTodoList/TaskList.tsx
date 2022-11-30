@@ -1,4 +1,4 @@
-import { List, ListItem } from "@mui/material";
+import { List, ListItem } from "../list/List";
 import { Task } from "../../entities/task";
 import { TaskListItem } from "./TaskListItem";
 
