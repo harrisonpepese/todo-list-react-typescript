@@ -1,4 +1,4 @@
-import { IconButton, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useState } from "react";
 import { Task } from "../../entities/task";
 import InputHelper from "../../utils/inputHelper";
@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ListItem, ListItemAction, ListItemIcon } from "../list/List";
 import Checkbox from "../inputField/CheckBox";
 import InputField from "../inputField/InputField";
+import { IconButton } from "../buttons/IconButton";
 
 export function TaskListItem(props: {
   index: number;
